@@ -20,24 +20,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 
 
-data class Review(val text: String, val author: String)
-
-val reviews = listOf(
-    Review("Excelente aplicación.", "Usuario A"),
-    Review("Muy útil para principiantes.", "Usuario B"),
-    Review("Necesita mejoras en la interfaz.", "Usuario C")
-)
-
-val categories = listOf(
-    "Introducción a la Impresión 3D",
-    "Modelado 3D",
-    "Calibración de Impresoras",
-)
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalCoilApi::class)
