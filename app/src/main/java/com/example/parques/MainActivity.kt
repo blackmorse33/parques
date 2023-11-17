@@ -16,6 +16,14 @@ import coil.annotation.ExperimentalCoilApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 
+data class Jugador(val id: Int, var posicion: Position)
+
+@Composable
+fun FichasJugadores(jugadores: List<Jugador>) {
+    jugadores.forEach { jugador ->
+        ParqueCelda(Color.Magenta)
+    }
+}
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalCoilApi::class)
@@ -83,17 +91,21 @@ data class Position(val fila: Int, val columna: Int)
 @Composable
 fun ParquesTablero() {
 
-    var jugadorPosicion by remember { mutableStateOf(Position(0, 0)) }
-    var resultadoDados by remember { mutableStateOf(0) }
+    val jugadores by remember { mutableStateOf(listOf(Jugador(1, Position(7, 7)))) }
+
 
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopStart
     ) {
         Column(
+
             modifier = Modifier.fillMaxSize(),
 
             ) {
+
+
+
             repeat(20) { fila ->
                 Row(
                     modifier = Modifier
@@ -148,20 +160,24 @@ fun ParquesTablero() {
 
 
                             else -> Color.Cyan
+
                         }
 
                         ParqueCelda(color)
 
 
+
+
                     }
                 }
             }
+            FichasJugadores(jugadores)
         }
 
             Button(
                 onClick = {
                     // Llamamos a la función proporcionada cuando se hace clic en el botón "Volver"
-                    onBackPressed()
+                    //onBackPressed()
                 },
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -179,9 +195,6 @@ fun ParquesTablero() {
 
 }
 
-fun onBackPressed() {
-    TODO("Not yet implemented")
-}
 
 @Composable
 fun ParqueCelda(color: Color) {
