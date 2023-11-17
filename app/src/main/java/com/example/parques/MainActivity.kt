@@ -40,7 +40,49 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@Composable
+fun Sistemad() {
+    var dice1 by remember { mutableStateOf(1) }
+    var dice2 by remember { mutableStateOf(1) }
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Texto que muestra el valor del dado 1
+        Text(
+            text = "Dado 1: $dice1",
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        // Texto que muestra el valor del dado 2
+        Text(
+            text = "Dado 2: $dice2",
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        // Texto que muestra la sumatoria de los dados
+        Text(
+            text = "Sumatoria: ${dice1 + dice2}",
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // Botón para lanzar los dados
+        Button(onClick = {
+            // Simular el lanzamiento de los dados generando números aleatorios
+            dice1 = (1..6).random()
+            dice2 = (1..6).random()
+        }) {
+            Text("Lanzar Dados")
+        }
+    }
+}
 
 data class Position(val fila: Int, val columna: Int)
 @Composable
@@ -121,16 +163,7 @@ fun ParquesTablero() {
             }
         }
 
-
-        Button(
-            onClick = {
-                resultadoDados = (1..6).random()
-                jugadorPosicion = moverJugador(jugadorPosicion, resultadoDados)
-            },
-            modifier = Modifier.align(Alignment.Center)
-        ) {
-            Text("Lanzar Dados")
-        }
+            Sistemad()
 
 
     }
