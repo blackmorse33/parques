@@ -44,6 +44,7 @@ class MainActivity : ComponentActivity() {
 fun Sistemad() {
     var dice1 by remember { mutableStateOf(1) }
     var dice2 by remember { mutableStateOf(1) }
+    var dice3 by remember { mutableStateOf(1) }
 
     Column(
         modifier = Modifier
@@ -68,7 +69,7 @@ fun Sistemad() {
 
         // Texto que muestra la sumatoria de los dados
         Text(
-            text = "Sumatoria: ${dice1 + dice2}",
+            text = "Sumatoria: ${dice1 + dice2} y ${dice3}",
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(bottom = 16.dp)
         )
@@ -78,6 +79,7 @@ fun Sistemad() {
             // Simular el lanzamiento de los dados generando números aleatorios
             dice1 = (1..6).random()
             dice2 = (1..6).random()
+            dice3 = dice1 + dice2
         }) {
             Text("Lanzar Dados")
         }
@@ -185,41 +187,7 @@ fun ParqueCelda(color: Color) {
 }
 
 
-fun moverJugador(posicionActual: Position, pasos: Int): Position {
-    // Lógica para mover al jugador según el resultado de los dados
-    // Puedes adaptar esto según las reglas específicas de tu juego
-    val nuevaFila = (posicionActual.fila + pasos) % 20
-    val nuevaColumna = (posicionActual.columna + pasos) % 20
-    return Position(nuevaFila, nuevaColumna)
-}
 
-/**
-@Composable
-fun DiceButton() {
-    val context = LocalContext.current
-    val diceSound = remember { MediaPlayer.create(context, R.raw.dice_roll) }
-
-    // Limpia los recursos cuando el composable ya no está en el árbol de composición
-    LaunchedEffect(Unit) {
-        onDispose {
-            if (diceSound.isPlaying) {
-                diceSound.stop()
-            }
-            diceSound.release()
-        }
-    }
-
-    Button(onClick = {
-        if(diceSound.isPlaying) {
-            diceSound.stop()
-        }
-        diceSound.start()
-    }) {
-        Text(text = "Lanzar dado")
-    }
-}
-
-*/
 
 @Preview
 @Composable

@@ -63,6 +63,8 @@ dependencies {
     implementation("io.coil-kt:coil-compose:1.3.2")
     implementation("androidx.compose.foundation:foundation-layout:1.1.0-alpha03")
     implementation("androidx.compose.ui:ui-android:1.5.4")
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    implementation("com.google.firebase:firebase-analytics")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518067885498",
+    "project_id": "juegoparchis-3478a",
+    "storage_bucket": "juegoparchis-3478a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518067885498:android:51e1804597247361f77983",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxjZEyviujqHg67QmHsOroVOAWAhtO88o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
