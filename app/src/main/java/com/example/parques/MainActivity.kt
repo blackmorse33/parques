@@ -158,6 +158,19 @@ fun ParquesTablero() {
             }
         }
 
+            Button(
+                onClick = {
+                    // Llamamos a la función proporcionada cuando se hace clic en el botón "Volver"
+                    onBackPressed()
+                },
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .align(Alignment.Center)
+            ) {
+                Text(text = "Volver")
+            }
+
+
             Sistemad()
 
 
@@ -166,10 +179,13 @@ fun ParquesTablero() {
 
 }
 
+fun onBackPressed() {
+    TODO("Not yet implemented")
+}
+
 @Composable
 fun ParqueCelda(color: Color) {
     Box(
-
         modifier = Modifier
             .size(19.8.dp)
             .background(color)
@@ -246,6 +262,9 @@ fun MiPantallaPrincipal() {
         ParquesTablero()
     }
 }
-
-
+@Preview
+@Composable
+fun prueba(){
+    ParquesTablero()
+}
 
