@@ -3,31 +3,18 @@ package com.example.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
-import android.media.MediaPlayer
 
 
 class MainActivity : ComponentActivity() {
@@ -35,11 +22,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ParquesTablero()
+            MiPantallaPrincipal()
 
         }
     }
 }
+
+
+
+
+
+
 @Composable
 fun Sistemad() {
     var dice1 by remember { mutableStateOf(1) }
@@ -187,11 +180,72 @@ fun ParqueCelda(color: Color) {
 }
 
 
-
-
-@Preview
 @Composable
-fun ParquesTableroPreview() {
-    ParquesTablero()
+fun Menu(onContinueClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp), // Agregamos un padding para dejar espacio alrededor del contenido
+        verticalArrangement = Arrangement.SpaceBetween // Distribuimos los elementos verticalmente
+    ) {
+
+        // TextView que ocupa casi toda la pantalla
+        Text(
+            text = """
+                ¡Bienvenido a Parqués Móvil con Firebase!
+
+                En nuestro emocionante juego de Parqués para dispositivos móviles, experimentarás la diversión clásica del parqués con un toque moderno. Conéctate con amigos y familiares mientras disfrutas de una emocionante partida desde la comodidad de tu dispositivo móvil.
+
+                Características destacadas:
+
+                1. Multijugador en Tiempo Real: Juega con amigos o desafía a jugadores de todo el mundo en partidas multijugador en tiempo real gracias a la potencia de Firebase.
+
+                
+
+                Descarga ahora y sumérgete en el clásico juego de mesa reinventado para la era digital. ¡Que comiencen las partidas de Parqués con Firebase!
+                
+                COMO JUGAR: 
+                
+                1. crea y sincroniza la partida con tu amigo para jugar 
+                
+                2. verifica que la partida se haya sincronizado correctamente
+                
+                3. para jugar usa el boton que se encuentra abajo para lanzar los dados 
+                
+                4. si deseas reiniciar el juego presiona el botón reiniciar y si estas con un amigo el tambien debe realizar esta acción.
+                
+                !DIVIERTETE¡
+            """.trimIndent(),
+            modifier = Modifier
+                 // Ocupa todo el ancho disponible
+                .weight(1f) // Toma tanto espacio como sea posible
+        )
+
+        // Botón "Continuar" debajo del TextView
+        Button(
+            onClick = { onContinueClick()},
+            modifier = Modifier
+                .fillMaxWidth() // Ocupa todo el ancho disponible
+                .padding(top = 16.dp) // Agregamos espacio entre el TextView y el botón
+        ) {
+            Text(text = "Continuar")
+        }
+    }
 }
+
+@Composable
+fun MiPantallaPrincipal() {
+    var showMenu by remember { mutableStateOf(true) }
+
+    if (showMenu) {
+        Menu {
+            // Acción a realizar cuando se hace clic en el botón "Continuar"
+            showMenu = false
+        }
+    } else {
+        ParquesTablero()
+    }
+}
+
+
 

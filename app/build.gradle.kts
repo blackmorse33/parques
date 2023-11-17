@@ -65,6 +65,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-android:1.5.4")
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("androidx.navigation:navigation-runtime-ktx:2.7.5")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
