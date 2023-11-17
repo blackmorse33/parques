@@ -20,10 +20,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
+import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import android.media.MediaPlayer
 
 
 class MainActivity : ComponentActivity() {
@@ -31,16 +35,20 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            //MyJetpackComposeContent()
-            //medialist()
             ParquesTablero()
 
         }
     }
 }
 
+
+data class Position(val fila: Int, val columna: Int)
 @Composable
 fun ParquesTablero() {
+
+    var jugadorPosicion by remember { mutableStateOf(Position(0, 0)) }
+    var resultadoDados by remember { mutableStateOf(0) }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopStart
@@ -91,7 +99,10 @@ fun ParquesTablero() {
                             fila in 9..10 && columna in 0..0 -> Color.White//verde
 
                             //casillas de salida
-
+                            fila in 3..3 && columna in 3..19 -> Color.White//arriba
+                            fila in 3..19 && columna in 3..3 -> Color.White//izquierda
+                            fila in 3..19 && columna in 16..16 -> Color.White//verde
+                            fila in 16..16 && columna in 3..19 -> Color.White//verde
 
 
 
@@ -101,27 +112,85 @@ fun ParquesTablero() {
 
                             else -> Color.Cyan
                         }
+
                         ParqueCelda(color)
+
+
                     }
                 }
             }
         }
+
+
+        Button(
+            onClick = {
+                resultadoDados = (1..6).random()
+                jugadorPosicion = moverJugador(jugadorPosicion, resultadoDados)
+            },
+            modifier = Modifier.align(Alignment.Center)
+        ) {
+            Text("Lanzar Dados")
+        }
+
+
     }
+
+
 }
 
 @Composable
 fun ParqueCelda(color: Color) {
     Box(
+
         modifier = Modifier
-            .size(19.dp)
+            .size(19.8.dp)
             .background(color)
     ) {
         // Contenido de la celda del parqués
+
     }
 }
+
+
+fun moverJugador(posicionActual: Position, pasos: Int): Position {
+    // Lógica para mover al jugador según el resultado de los dados
+    // Puedes adaptar esto según las reglas específicas de tu juego
+    val nuevaFila = (posicionActual.fila + pasos) % 20
+    val nuevaColumna = (posicionActual.columna + pasos) % 20
+    return Position(nuevaFila, nuevaColumna)
+}
+
+/**
+@Composable
+fun DiceButton() {
+    val context = LocalContext.current
+    val diceSound = remember { MediaPlayer.create(context, R.raw.dice_roll) }
+
+    // Limpia los recursos cuando el composable ya no está en el árbol de composición
+    LaunchedEffect(Unit) {
+        onDispose {
+            if (diceSound.isPlaying) {
+                diceSound.stop()
+            }
+            diceSound.release()
+        }
+    }
+
+    Button(onClick = {
+        if(diceSound.isPlaying) {
+            diceSound.stop()
+        }
+        diceSound.start()
+    }) {
+        Text(text = "Lanzar dado")
+    }
+}
+
+*/
 
 @Preview
 @Composable
 fun ParquesTableroPreview() {
     ParquesTablero()
 }
+
